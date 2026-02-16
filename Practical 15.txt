@@ -1,0 +1,72 @@
+/*
+Write a program for billing system for a shopping mall. Create a class BillGenerator that
+Uses method overloading to generate bills based on customer type:
+ generateBill(int itemTotal): For regular customers, apply no discount.
+ generateBill (int itemTotal, int discount): For privileged customers, apply flat
+discount in rupees.
+ generateBill(int itemTotal, double discountPercent): For festive offers, apply
+percentage discount.
+Write a program to display the final bill amount using appropriate overloaded method based
+On customer category.
+*/
+
+import java.util.Scanner;
+
+class BillGenerator {
+
+    void generateBill(int itemTotal) {
+        System.out.println("Customer Type: Regular");
+        System.out.println("Final Bill Amount: ₹" + itemTotal);
+    }
+
+    void generateBill(int itemTotal, int discount) {
+        System.out.println("Customer Type: Privileged");
+        int finalAmount = itemTotal - discount;
+        System.out.println("Final Bill Amount: ₹" + finalAmount);
+    }
+
+    void generateBill(int itemTotal, double discountPercent) {
+        System.out.println("Customer Type: Festive Offer");
+        double discountAmount = itemTotal * discountPercent / 100;
+        double finalAmount = itemTotal - discountAmount;
+        System.out.println("Final Bill Amount: ₹" + finalAmount);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        BillGenerator bill = new BillGenerator();
+
+        System.out.print("Enter total bill amount: ");
+        int itemTotal = sc.nextInt();
+
+        System.out.println("\nSelect Customer Type:");
+        System.out.println("1. Regular Customer");
+        System.out.println("2. Privileged Customer");
+        System.out.println("3. Festive Offer Customer");
+        System.out.print("Enter your choice: ");
+        int choice = sc.nextInt();
+
+        switch (choice) {
+            case 1:
+                bill.generateBill(itemTotal);
+                break;
+
+            case 2:
+                System.out.print("Enter flat discount (₹): ");
+                int discount = sc.nextInt();
+                bill.generateBill(itemTotal, discount);
+                break;
+
+            case 3:
+                System.out.print("Enter discount percentage: ");
+                double discountPercent = sc.nextDouble();
+                bill.generateBill(itemTotal, discountPercent);
+                break;
+
+            default:
+                System.out.println("Invalid choice!");
+        }
+
+        sc.close();
+    }
+}
